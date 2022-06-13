@@ -39,17 +39,17 @@ async function bench() {
 		)
 	);
 
-		new Benchmark('construct', {
-			fn: () => {
-				for (const input of inputs) {
-					new MagicString(input);
-				}
+	new Benchmark('construct', {
+		fn: () => {
+			for (const input of inputs) {
+				new MagicString(input);
 			}
-		}).on('complete', (event) => {
-			console.log(String(event.target));
-		}).on('error', (event) => {
-			console.error(event.target.error);
-		}).run()
+		}
+	}).on('complete', (event) => {
+		console.log(String(event.target));
+	}).on('error', (event) => {
+		console.error(event.target.error);
+	}).run();
 
 	runWithInstance('append', inputs, s => {
 		s.append(';"append";');
