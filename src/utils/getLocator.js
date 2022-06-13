@@ -1,10 +1,9 @@
 export default function getLocator(source) {
-	const originalLines = source.split('\n');
-	const lineOffsets = [];
+	const lineOffsets = [0];
 
-	for (let i = 0, pos = 0; i < originalLines.length; i++) {
-		lineOffsets.push(pos);
-		pos += originalLines[i].length + 1;
+	let lineBreakPos = -1;
+	while ((lineBreakPos = source.indexOf('\n', lineBreakPos+1)) !== -1) {
+		lineOffsets.push(lineBreakPos + 1);
 	}
 
 	return function locate(index) {
